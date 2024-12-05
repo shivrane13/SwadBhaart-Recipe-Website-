@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include('./head',{title:`Indian Recipe-${name}`}) %>
+  <body>
+    <div class="container-xxl px-md-5 bg-white shadow-lg" id="all-container">
+      <header><%- include('./header') %></header>
+      <main>
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/">Home</a></li>
+            <li class="breadcrumb-item">
+              <a href="/categories">categories</a>
+            </li>
+            <li class="breadcrumb-item active" aria-current="page">
+              <%= name %>
+            </li>
+          </ol>
+        </nav>
+
+        <div class="row row-cols-2 row-cols-lg-5 g-2 g-lg-3 mb-4">
+          <% if(categoryRecipe != '') { %>
+          <!--for loop -->
+          <% for(const recipe of categoryRecipe) { %>
+          <a
+            href="/recipe/<%= recipe.id %>"
+            class="col text-center category__link"
+          >
+            <div class="category__img category__img--large shadow">
+              <img
+                src="<%= recipe.image %> "
+                alt="<%= recipe.name %> "
+                loading="lazy"
+              />
+            </div>
+            <div class="pt-1"><%= recipe.name %></div>
+          </a>
+          <% } %> <% } %>
+        </div>
+      </main>
+      <footer class="py-5">
+        <p>Build by Gaurav</p>
+      </footer>
+    </div>
+  </body>
+</html>

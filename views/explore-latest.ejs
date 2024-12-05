@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('./head') %>
+</head>
+<body>
+     <div class="container-xxl px-md-5 bg-white shadow-lg" id="all-container">
+        <header>
+            <%- include("./header") %>
+        </header>
+        <main>
+            <h1>Explore Latest</h1>
+            <% if (recipes.length == 0 ) {%>
+                <p class="text-center pt-5">
+                     No item found! Please try again with Keyword
+                </p>
+            <% } else { %>
+                <!-- for loop for itteration -->
+                <div class="row row-cols-2 row-cols-lg-5 g-2 g-lg-3 mb-4">
+                <% for(const recipe of recipes) { %>
+                    <a
+                        href="/recipe/<%= recipe.id %>"
+                        class="col text-center category__link"
+                    >
+                    <div class="category__img category__img--large shadow">
+                      <img
+                        src="<%= recipe.image %> "
+                        alt="<%= recipe.name %> "
+                        loading="lazy"
+                      />
+                    </div>
+                    <div class="pt-1"><%= recipe.name %></div>
+                    </a>
+                <% } %>
+                </div>
+                <% } %>
+        </main>
+        <footer class="py-5">
+           <p>Build by Gaurav</p>
+      </footer>
+     </div>
+
+</body>
+</html>

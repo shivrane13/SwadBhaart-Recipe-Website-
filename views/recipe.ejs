@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include('./head') %>
+  <body>
+    <div class="container-xxl px-md-5 bg-white shadow-lg" id="all-container">
+      <header><%- include('./header') %></header>
+      <% if(recipe != null) {%>
+      <main>
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page">
+              <%= recipe.name %>
+            </li>
+          </ol>
+        </nav>
+
+        <div class="row">
+          <div class="col-12 col-md-4">
+            <img
+              src="<%= recipe.image %>"
+              alt="<%= recipe.name %>"
+              class="img-fluid sticky-top"
+              style="top: 20px"
+              loading="lazy"
+            />
+          </div>
+          <div class="col-12 col-md-8">
+            <div class="row">
+              <div class="col-12"><h1><%= recipe.name %></h1></div>
+              <div class="col-12 mb-4">
+                <i class="bi bi-tag"></i><%= recipe.category %>
+              </div>
+              <div class="col-12" style="white-space: pre-line">
+                <h4>Cooking Instructions</h4>
+                <%= recipe.description%>
+              </div>
+            </div>
+
+            <div class="row pt-4">
+              <div class="col-12">
+                <h4>Ingredients</h4>
+                <ul class="list-group list-group-flush">
+                  <% for(const ingredient of ingredients ) {%>
+                  <li class="list-group-item"><%= ingredient %></li>
+                  <% } %>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+      <% } else { %>
+      <p>No Item found</p>
+      <% } %>
+      <footer class="py-5">
+        <p>Build by Gaurav</p>
+      </footer>
+    </div>
+  </body>
+</html>

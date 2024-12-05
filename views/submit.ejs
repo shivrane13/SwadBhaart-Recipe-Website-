@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include("./head") %>
+  <body>
+    <div class="container-xxl px-md-5 bg-white shadow-lg" id="all-container">
+      <header><%- include("./header") %></header>
+      <main>
+        <div class="px-4 py-5 my-5 text-center">
+          <h1 class="display-5 fw-bold">Submit Your Recipe</h1>
+          <div class="col-lg-6 mx-auto">
+            <p class="lead">
+              Share your amazing recipes with thousand of People accross the
+              world. Fill out form to get Started
+            </p>
+          </div>
+        </div>
+
+        <% if(!locals.isAuth) { %> <%- include('./login') %> <% } else { %>
+
+        <div class="row justify-content-center">
+          <% if(infoSubmitObj != ""){ %>
+          <div class="alert alert-success" role="alert">
+            <%= infoSubmitObj %>
+          </div>
+          <% } %>
+          <div class="col-8">
+            <form
+              action="/submit-recipe"
+              method="post"
+              enctype="multipart/form-data"
+            >
+              <div class="row g-3">
+                <div class="col-12">
+                  <label for="email" class="form-lable">Email</label>
+                  <input
+                    type="email"
+                    name="email"
+                    id="email"
+                    class="form-control"
+                    value="<%= locals.email %>"
+                    disabled
+                  />
+                </div>
+
+                <div class="col-12">
+                  <label for="name" class="form-lable">Recipe Name</label>
+                  <input
+                    type="text"
+                    name="name"
+                    id="name"
+                    class="form-control"
+                    required
+                  />
+                </div>
+
+                <div class="col-12">
+                  <label for="description" class="form-lable">Description</label
+                  ><br />
+                  <!-- for  row-->
+                  <textarea
+                    class="form-control"
+                    name="description"
+                    id="description"
+                    cols="85"
+                    rows="5"
+                    required
+                  ></textarea>
+                </div>
+
+                <div class="col-12">
+                  <label for="ingredients" class="form-lable">Ingredients</label
+                  ><br />
+                  <small>Note: Please enter each ingredient on next line</small
+                  ><br />
+                  <textarea
+                    class="form-control"
+                    name="ingredients"
+                    id="ingredients"
+                    cols="85"
+                    rows="5"
+                    required
+                  ></textarea>
+                </div>
+
+                <div class="col-12">
+                  <label for="category" class="form-lable"
+                    >Select Category</label
+                  >
+                  <select
+                    class="form-select form-control"
+                    name="category"
+                    aria-label="Category"
+                    required
+                  >
+                    <option selected>Select Category</option>
+                    <% for (const category of categories) { %>
+                    <option value="<%= category.name %>">
+                      <%= category.name %>
+                    </option>
+                    <% } %>
+                  </select>
+                </div>
+
+                <div class="col-12">
+                  <label for="image">Product Image</label>
+                  <input
+                    type="file"
+                    class="form-control"
+                    name="image"
+                    accept="image/"
+                    required
+                  />
+                </div>
+
+                <div>
+                  <button type="submit" class="btn btn-primary">
+                    Submit Recipe
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+          <%- include('./userrecipe') %>
+        </div>
+        <% } %>
+      </main>
+      <footer class="py-5">
+        <p>Build by Gaurav</p>
+      </footer>
+    </div>
+  </body>
+</html>
